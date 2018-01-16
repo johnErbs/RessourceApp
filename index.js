@@ -30,24 +30,13 @@ app.get('/api/obj', function (req, res) {
 app.post('/api/obj', urlencodedParser, function (req, res) {
     var testMsg = "Get Request";
     console.log(testMsg);
-    //res.send(testMsg);
-    var data = req.body;
-    console.log(data);
-    if (req.body.Key === "") {
-        console.log("FUCK");
-        res.send(data);
-    }
-    else {
-        console.log("bla bla bla");
-        res.send("data is not defined!");
-    }
+    res.send(__dirname + 'index.html');
 });
 app.put('/api/obj', function (req, res) {
 });
 app.delete('/api/obj', function (req, res) {
 });
 //start the API server & listens for requests
-var server = app.listen(process.env.PORT || 3000, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
+app.listen(process.env.port || 3000, function () {
+    console.log("listening for requests");
 });
