@@ -59,8 +59,9 @@ app.delete('/api/obj', (req, res) =>{
 });
 
 //start the API server & listens for requests
-app.listen(process.env.port || 3000, function(){
-    console.log("listening for requests")
+let server = app.listen(process.env.PORT || 3000, () => {
+    let port = server.address().port;
+    console.log("App now running on port", port);
 });
  
 
