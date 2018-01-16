@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 ///
 var express = require("express");
 var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
 var cors = require("cors");
 //setup express app
 var app = express();
@@ -19,19 +18,29 @@ app.use(function (err, req, res, next) {
 });
 /*MONGO connection...*/
 //ConnectionString to mongoo-DB (Creates obj schema in DB)
-mongoose.connect('mongodb://localhost/obj');
+//mongoose.connect('mongodb://localhost/obj');
 //Overwrites to the global Node.js Promise prop.
-mongoose.Promise = global.Promise;
+//(<any>mongoose).Promise = global.Promise;
 /*HTTP Methods...*/
 app.get('/api/obj', function (req, res) {
     var testMsg = "Get Request";
     console.log(testMsg);
     res.send(testMsg);
 });
-app.post('/api/obj', function (req, res) {
+app.post('/api/obj', urlencodedParser, function (req, res) {
     var testMsg = "Get Request";
     console.log(testMsg);
-    res.send(testMsg);
+    //res.send(testMsg);
+    var data = req.body;
+    console.log(data);
+    if (req.body.Key === "") {
+        console.log("FUCK");
+        res.send(data);
+    }
+    else {
+        console.log("bla bla bla");
+        res.send("data is not defined!");
+    }
 });
 app.put('/api/obj', function (req, res) {
 });
